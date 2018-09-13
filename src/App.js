@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom"; //switch ather solution
 import NavBar from "./components/navbar";
 import Products from "./components/products";
 import Posts from "./components/posts";
@@ -13,9 +14,27 @@ class App extends Component {
     return (
       <div>
         <NavBar />
+        <div className="content">
+          <Switch>
+            <Route path="/products/:id" component={ProductDetails} />
+            <Route
+              path="/products"
+              render={props => <Products sortBy="newest" {...props} />}
+            />
+            <Route path="/posts/:year?/:month?" component={Posts} />
+            <Route path="/admin" component={Dashboard} />
+            <Route path="/" exact component={Home} />
+          </Switch>
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+/*exact one solution <Route path="/" exact component={Home} />  
+Passing properties to <Route
+              path="/products"
+              render={() => <Products sortBy="newest" />}
+            />
+*/
