@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom"; //switch ather solution
+import { Route, Switch, Redirect } from "react-router-dom"; //switch ather solution
 import NavBar from "./components/navbar";
 import Products from "./components/products";
 import Posts from "./components/posts";
@@ -23,7 +23,10 @@ class App extends Component {
             />
             <Route path="/posts/:year?/:month?" component={Posts} />
             <Route path="/admin" component={Dashboard} />
+            <Redirect from="/messages" to="/posts" />
+            <Route path="/not-found" component={NotFound} />
             <Route path="/" exact component={Home} />
+            <Redirect to="/not-found" />
           </Switch>
         </div>
       </div>
@@ -35,6 +38,11 @@ export default App;
 /*exact one solution <Route path="/" exact component={Home} />  
 Passing properties to <Route
               path="/products"
-              render={() => <Products sortBy="newest" />}
-            />
+              render={() => <Products sortBy="newest" />} 
+            /> 
+
+
+
+            //use url
+            http://localhost:3000/messages
 */
